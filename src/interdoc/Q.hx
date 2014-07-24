@@ -11,7 +11,12 @@ class Q
 		if (text != null) return EParagraph.P([EElement.S(text)]);
 		if (str != null) return EParagraph.P([el]);
 		if (strs == null) throw "Error";
-		return new P(els);
+		return EParagraph.P(els);
+	}
+	
+	public static function img(src:String)
+	{
+		return EElement.Img(src, null, null);
 	}
 	
 	/*
