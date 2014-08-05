@@ -13,7 +13,7 @@ using StringTools;
 class Html
 {
 
-	static public function eGetHtml(e:EElement)
+	static function eGetHtml(e:EElement)
 	{
 		return switch e {
 			case EElement.S(s): s.trim();
@@ -34,12 +34,12 @@ class Html
 	}
 	
 	
-	static public function elsGetHtml(els:EElements)
+	static  function elsGetHtml(els:EElements)
 	{
 		return els.map(function(e) return e.eGetHtml()).join(' ');
 	}
 	
-	static public function pGetHtml(p:EParagraph)
+	static  function pGetHtml(p:EParagraph)
 	{
 		return switch p {
 			case EParagraph.P(els): '<p>' + els.elsGetHtml() + '</p>';
@@ -62,7 +62,7 @@ class Html
 		}).join('') ;
 	}
 
-	static public function pGetEls(p:EParagraph)
+	static  function pGetEls(p:EParagraph)
 	{
 		return switch p {
 			case EParagraph.P(els) | H1(els) | H2(els) | H3(els) | H4(els) | None(els): els;
@@ -71,9 +71,9 @@ class Html
 	}
 	
 	
-	static public function parsGetHtml(pars:EParagraphs)
+	static public function getHtml(pars:EParagraphs)
 	{
-		return pars.map(function(p) return p.pGetHtml());
+		return pars.map(function(p) return p.pGetHtml()).toString();
 	}
 	
 	

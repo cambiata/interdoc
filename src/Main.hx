@@ -28,16 +28,12 @@ class Main
 			ETablerow.TBody([EParagraph.None([EElement.S('Cell2a'), EElement.S('Cell2a-forts')]), EParagraph.None([EElement.S('Cell2b'), EElement.S('Cell2b-forts')])]),
 			ETablerow.TFoot([EParagraph.None([EElement.S('Foot a'), EElement.S('Foot a-forts')]), EParagraph.None([EElement.S('Foot b'), EElement.S('Foot b-forts')])]),
 		]);
-
-		
-
-
-
-
 		var pars:EParagraphs = [ph, p0, p1, p2, ul, img, table];
 
 		var html = Html.parsGetHtml(pars);
 
+		
+		
 		trace (html);
 	}
 }
