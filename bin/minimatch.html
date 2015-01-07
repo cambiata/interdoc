@@ -42,41 +42,36 @@ other interpretation of the glob pattern.  Thus, a pattern like
 checked for validity.  Since those two are valid, matching proceeds.</p>
 <h2>Minimatch Class</h2>
 <p>Create a minimatch object by instanting the <code>MiniMatch</code> class.</p>
-<pre><code>var mm = new MiniMatch(pattern, options)</code></pre>
-<h3>Properties</h3><ul><li><code>pattern</code> The original pattern the minimatch object represents.</li><li><code>options</code> The options supplied to the constructor.</li><li>
-<p><code>set</code> A 2-dimensional array of regexp or string expressions.
-  Each row in the array corresponds to a brace-expanded pattern. Each item in 
-  the row corresponds to a single path-part.  For example, the pattern 
-  <code>{a,b/c}/d</code> would expand to a set of patterns like: <code>[[a, d],[b, c, d]]</code> If a 
-  portion of the pattern doesn't have any "magic" in it (that is, it's 
-  something like <code>"foo"</code> rather than <code>fo*o?</code>), then it will be left as a string 
-  rather than converted to a regular expression.</p></li><li>
-<p><code>regexp</code> Created by the <code>makeRe</code> method.  A single regular expression
-  expressing the entire pattern.  This is useful in cases where you wish
-  to use the pattern somewhat like <code>fnmatch(3)</code> with <code>FNM_PATH</code> enabled.</p></li><li><code>negate</code> True if the pattern is negated.</li><li><code>comment</code> True if the pattern is a comment.</li><li><code>empty</code> True if the pattern is <code>""</code>.</li></ul>
-<h3>Methods</h3><ul><li>
-<p><code>makeRe</code> Generate the <code>regexp</code> member if necessary, and return it.
-  Will return <code>false</code> if the pattern is invalid.</p></li><li>
-<p><code>match(fname)</code> Return true if the filename matches the pattern, or
-  false otherwise.</p></li><li>
-<p><code>matchOne(fileArray, patternArray, partial)</code> Take a <code>/</code>-split
-  filename, and match it against a single row in the <code>regExpSet</code>.  This
-  method is mainly for internal use, but is exposed so that it can be
-  used by a glob-walker that needs to avoid excessive filesystem calls.</p></li></ul>
+<pre><code class="prettyprint javascript">var mm = new MiniMatch(pattern, options)</code></pre>
+<h3>Properties</h3><ul><li><code>pattern</code> The original pattern the minimatch object represents.</li><li><code>options</code> The options supplied to the constructor.</li><li><code>set</code> A 2-dimensional array of regexp or string expressions.
+Each row in the array corresponds to a brace-expanded pattern. Each item in 
+the row corresponds to a single path-part.  For example, the pattern 
+<code>{a,b/c}/d</code> would expand to a set of patterns like: <code>[[a, d],[b, c, d]]</code> If a 
+portion of the pattern doesn't have any "magic" in it (that is, it's 
+something like <code>"foo"</code> rather than <code>fo*o?</code>), then it will be left as a string 
+rather than converted to a regular expression.</li><li><code>regexp</code> Created by the <code>makeRe</code> method.  A single regular expression
+expressing the entire pattern.  This is useful in cases where you wish
+to use the pattern somewhat like <code>fnmatch(3)</code> with <code>FNM_PATH</code> enabled.</li><li><code>negate</code> True if the pattern is negated.</li><li><code>comment</code> True if the pattern is a comment.</li><li><code>empty</code> True if the pattern is <code>""</code>.</li></ul>
+<h3>Methods</h3><ul><li><code>makeRe</code> Generate the <code>regexp</code> member if necessary, and return it.
+Will return <code>false</code> if the pattern is invalid.</li><li><code>match(fname)</code> Return true if the filename matches the pattern, or
+false otherwise.</li><li><code>matchOne(fileArray, patternArray, partial)</code> Take a <code>/</code>-split
+filename, and match it against a single row in the <code>regExpSet</code>.  This
+method is mainly for internal use, but is exposed so that it can be
+used by a glob-walker that needs to avoid excessive filesystem calls.</li></ul>
 <p>All other methods are internal, and will be called as necessary.</p>
 <h2>Functions</h2>
 <h3>MiniMatch.matchPath(path, pattern, options)</h3>
 <p>Tests a path against the pattern using the options.</p>
-<pre><code>var isHX = MiniMatch.matchPath(file, "*.hx", { matchBase:true })</code></pre>
+<pre><code class="prettyprint javascript">var isHX = MiniMatch.matchPath(file, "*.hx", { matchBase:true })</code></pre>
 <h3>MiniMatch.filter(pattern, options)</h3>
 <p>Returns a function that tests its supplied argument, suitable for use with 
 <code>Lambda.filter</code>.</p>
-<pre><code>var files = fileList.filter(MiniMatch.filter("*.hx", { matchBase:true }))</code></pre>
+<pre><code class="prettyprint javascript">var files = fileList.filter(MiniMatch.filter("*.hx", { matchBase:true }))</code></pre>
 <h3>MiniMatch.matchPaths(list, pattern, options)</h3>
 <p>Match against the list of files, in the style of fnmatch or glob.  If nothing 
 is matched, and options.nonull is set, then return a list containing the 
 pattern itself.</p>
-<pre><code>var files = MiniMatch.match(fileList, "*.hx", { matchBase:true }))</code></pre>
+<pre><code class="prettyprint javascript">var files = MiniMatch.match(fileList, "*.hx", { matchBase:true }))</code></pre>
 <h3>MiniMatch.matcher(pattern, options)</h3>
 <p>Make a regular expression object from the pattern.</p>
 <h2>Options</h2>

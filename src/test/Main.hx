@@ -31,7 +31,7 @@ class InterdocTests extends TestCase
 	public function test0()
 	{
 		var par = EParagraph.H1([EElement.S('This is a header1')]);
-		this.assertEquals(['<h1>This is a header1</h1>'].toString(), Html.getHtml([par]).toString());
+		this.assertEquals(['<h1>This is a header1</h1>'].toString(), Html.toHtml([par]).toString());
 		
 		var ph = EParagraph.H1([EElement.S('This is a header1')]);
 		var p0 = EParagraph.P([EElement.S('Hello world!')]);
@@ -40,13 +40,13 @@ class InterdocTests extends TestCase
 		var ul = EParagraph.UL([[EElement.S('first')], [EElement.S('second')]]);
 		var img = EParagraph.P([EElement.Img('/picture.png', null, 123)]);
 		var table = EParagraph.Table([
-			ETablerow.THead([EParagraph.None([EElement.S('Head a'), EElement.S('Head a-forts')]), EParagraph.None([EElement.S('Head b'), EElement.S('Head b-forts')])]),
-			ETablerow.TBody([EParagraph.None([EElement.S('Cell1a'), EElement.S('Cell1a-forts')]), EParagraph.None([EElement.S('Cell1b'), EElement.S('Cell1b-forts')])]),
-			ETablerow.TBody([EParagraph.None([EElement.S('Cell2a'), EElement.S('Cell2a-forts')]), EParagraph.None([EElement.S('Cell2b'), EElement.S('Cell2b-forts')])]),
-			ETablerow.TFoot([EParagraph.None([EElement.S('Foot a'), EElement.S('Foot a-forts')]), EParagraph.None([EElement.S('Foot b'), EElement.S('Foot b-forts')])]),
+			ETablerow.THead([EParagraph.Elements([EElement.S('Head a'), EElement.S('Head a-forts')]), EParagraph.Elements([EElement.S('Head b'), EElement.S('Head b-forts')])]),
+			ETablerow.TBody([EParagraph.Elements([EElement.S('Cell1a'), EElement.S('Cell1a-forts')]), EParagraph.Elements([EElement.S('Cell1b'), EElement.S('Cell1b-forts')])]),
+			ETablerow.TBody([EParagraph.Elements([EElement.S('Cell2a'), EElement.S('Cell2a-forts')]), EParagraph.Elements([EElement.S('Cell2b'), EElement.S('Cell2b-forts')])]),
+			ETablerow.TFoot([EParagraph.Elements([EElement.S('Foot a'), EElement.S('Foot a-forts')]), EParagraph.Elements([EElement.S('Foot b'), EElement.S('Foot b-forts')])]),
 		]);
 		var pars:EParagraphs = [ph, p0, p1, p2, ul, img, table];
-		var html = Html.getHtml(pars);
+		var html = Html.toHtml(pars);
 		var test = ['<h1>This is a header1</h1>,<p>Hello world!</p>,<p>Normal <b>fet</b> <i>kursiv</i> normal.</p>,<p><a href="http://google.com">Link to Google</a></p>,<ul><li>first</li><li>second</li></ul>,<p><img src="/picture.png" height="123"  /></p>,<table><tr><td>Head a Head a-forts</td><td>Head b Head b-forts</td></tr><tr><td>Cell1a Cell1a-forts</td><td>Cell1b Cell1b-forts</td></tr><tr><td>Cell2a Cell2a-forts</td><td>Cell2b Cell2b-forts</td></tr><tr><td>Foot a Foot a-forts</td><td>Foot b Foot b-forts</td></tr></table>'];
 		this.assertEquals(test.toString().replace('\n', ''), html.toString());		
 	}

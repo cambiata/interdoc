@@ -1,5 +1,24 @@
 class MarkdownExample
 {
+	
+public static var test = 
+
+"# Test
+
+This is a test.
+
+* Alt 1
+* Alt 2
+* Alt 3
+
+Här kommer lite text med **fetstil** och *kursiva* inslag.
+
+1. Hej.
+5. Hopp i lingonskogen, bland höga **tuvor** och låga *bäckar*...
+
+";
+	
+	
 	public static var minimatch = 
 "# MiniMatch
 
